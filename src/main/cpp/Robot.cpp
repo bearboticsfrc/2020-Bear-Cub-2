@@ -1,35 +1,78 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
 #include "Robot.h"
-#include "ctre/Phoenix.h"
 
-TalonSRX srx3 = {3};
-TalonSRX srx4 = {4};
+#include <frc/Joystick.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc2/command/CommandScheduler.h>
 
-TalonSRX srx8 = {8};
-TalonSRX srx6 = {6};
+frc::Joystick joystick(0);
 
-void Robot::RobotInit() {
-    
+void Robot::RobotInit() {}
+
+/**
+ * This function is called every robot packet, no matter the mode. Use
+ * this for items like diagnostics that you want to run during disabled,
+ * autonomous, teleoperated and test.
+ *
+ * <p> This runs after the mode specific periodic functions, but before
+ * LiveWindow and SmartDashboard integrated updating.
+ */
+void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
+
+/**
+ * This function is called once each time the robot enters Disabled mode. You
+ * can use it to reset any subsystem information you want to clear when the
+ * robot is disabled.
+ */
+void Robot::DisabledInit() {}
+
+void Robot::DisabledPeriodic() {}
+
+/**
+ * This autonomous runs the autonomous command selected by your {@link
+ * RobotContainer} class.
+ */
+void Robot::AutonomousInit() {
+  m_autonomousCommand = m_container.GetAutonomousCommand();
+
+  if (m_autonomousCommand != nullptr) {
+    m_autonomousCommand->Schedule();
+  }
 }
 
-void Robot::AutonomousInit() {}
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() {}
-void Robot::TeleopPeriodic() {
-    srx3.Set(ControlMode::PercentOutput, 0.2);
-    srx4.Set(ControlMode::PercentOutput, 0.2);
-    srx8.Set(ControlMode::PercentOutput, 0.2);
-    srx6.Set(ControlMode::PercentOutput, 0.2);
+void Robot::TeleopInit() {
+  // This makes sure that the autonomous stops running when
+  // teleop starts running. If you want the autonomous to
+  // continue until interrupted by another command, remove
+  // this line or comment it out.
+  m_teleopCommand = m_container.GetTeleopCommand();
+
+  if (m_autonomousCommand != nullptr) {
+    m_autonomousCommand->Cancel();
+    m_autonomousCommand = nullptr;
+  }
+
+  if (m_teleopCommand != nullptr) {
+    m_teleopCommand->Schedule();
+  }
 }
 
-void Robot::TestInit() {}
+/**
+ * This function is called periodically during operator control.
+ */
+void Robot::TeleopPeriodic() {}
+
+/**
+ * This function is called periodically during test mode.
+ */
 void Robot::TestPeriodic() {}
 
 #ifndef RUNNING_FRC_TESTS
