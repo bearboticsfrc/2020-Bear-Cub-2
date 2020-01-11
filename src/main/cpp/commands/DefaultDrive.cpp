@@ -20,7 +20,7 @@ void DefaultDrive::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void DefaultDrive::Execute() {
-  double forward = -joystick.GetY();
+  double forward = joystick.GetY();
   double turn = -joystick.GetZ();
 
   double backLeftSpeed = forward + turn;
