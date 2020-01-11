@@ -20,9 +20,15 @@ void DefaultDrive::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void DefaultDrive::Execute() {
-  double speed = -joystick.GetY();
+  double forward = -joystick.GetY();
+  double turn = -joystick.GetZ();
 
-  drivetrain->SetSpeed(speed);
+  double backLeftSpeed = forward + turn;
+  double frontLeftSpeed = forward + turn;
+  double backRightSpeed = forward - turn;
+  double frontRightSpeed = forward - turn;
+
+  drivetrain->SetAllSpeed(backLeftSpeed, backRightSpeed, frontLeftSpeed, frontRightSpeed);
 }
 
 // Called once the command ends or is interrupted.
