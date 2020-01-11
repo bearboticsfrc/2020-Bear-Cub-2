@@ -26,3 +26,11 @@ void Drivetrain::SetSpeed(double speed) {
     frontLeft.Set(ControlMode::PercentOutput, speed);
     frontRight.Set(ControlMode::PercentOutput, speed);
 }
+
+
+void Drivetrain::SetAllSpeed(double backLeftSpeed, double backRightSpeed, double frontLeftSpeed, double frontRightSpeed) {
+    backLeft.Set(ControlMode::PercentOutput, backLeftSpeed);
+    backRight.Set(ControlMode::PercentOutput, backRightSpeed);
+    frontLeft.Set(ControlMode::PercentOutput, frontLeftSpeed);
+    frontRight.Set(ControlMode::PercentOutput, frontRightSpeed);
+}
