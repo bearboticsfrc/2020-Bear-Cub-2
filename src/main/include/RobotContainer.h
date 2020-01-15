@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc2/command/Command.h>
+#include <ctre/phoenix/sensors/PigeonIMU.h>
 
 #include "commands/ExampleCommand.h"
 #include "commands/DefaultDrive.h"
@@ -36,6 +37,8 @@ class RobotContainer {
   ExampleCommand m_autonomousCommand;
   DefaultDrive m_defaultDrive;
   AlignTarget m_alignTarget;
+
+  PigeonIMU pigeon;
 
   void ConfigureButtonBindings();
 };
