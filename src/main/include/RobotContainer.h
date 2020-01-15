@@ -11,6 +11,7 @@
 
 #include "commands/ExampleCommand.h"
 #include "commands/DefaultDrive.h"
+#include "commands/AlignTarget.h"
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/Drivetrain.h"
 
@@ -34,6 +35,7 @@ class RobotContainer {
   Drivetrain m_drivetrain;
   ExampleCommand m_autonomousCommand;
   DefaultDrive m_defaultDrive;
+  AlignTarget m_alignTarget;
 
   void ConfigureButtonBindings();
 };

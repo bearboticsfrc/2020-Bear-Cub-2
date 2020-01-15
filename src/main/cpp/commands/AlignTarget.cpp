@@ -9,6 +9,7 @@
 #include "networktables/NetworkTable.h"
 #include "networktables/NetworkTableInstance.h"
 #include "subsystems/Drivetrain.h"
+#include <iostream>
 
 AlignTarget::AlignTarget(Drivetrain *drive) :
   drivetrain(drive)
@@ -23,12 +24,14 @@ void AlignTarget::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void AlignTarget::Execute() {
-  bool hasTarget = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tv", 0);
+  bool hasTarget = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetEntry("tv").GetDouble(0.0);
 
   if (hasTarget) {
-    double x = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0);
+    std::cout << "TARGETTARGETTARGET\n";
 
-    drivetrain->SetAllSpeed(x / 30.0, -x / 30.0, x / 30.0, -x / 30.0);
+    double x = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetEntry("tx").GetDouble(0.0);
+
+    drivetrain->SetAllSpeed(-x / 30.0, x / 30.0, -x / 30.0, x / 30.0);
   }
 }
 
@@ -36,8 +39,4 @@ void AlignTarget::Execute() {
 bool AlignTarget::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void AlignTarget::End() {}
-
-// Called when another command which requires one or more of the same
-// subsystems is scheduled to run
-void AlignTarget::Interrupted() {}
+void AlignTarget::End(bool interrupted) {}

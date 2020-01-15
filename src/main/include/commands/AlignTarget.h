@@ -7,18 +7,19 @@
 
 #pragma once
 
-#include <frc/commands/Command.h>
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
 
 class Drivetrain;
 
-class AlignTarget : public frc::Command {
+class AlignTarget
+    : public frc2::CommandHelper<frc2::CommandBase, AlignTarget> {
  public:
   AlignTarget(Drivetrain *drivetrain);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+  void End(bool interrupted) override;
 
   private:
   Drivetrain *drivetrain;

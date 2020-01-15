@@ -10,10 +10,13 @@
 #include <frc/Joystick.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandScheduler.h>
+#include "networktables/NetworkTableInstance.h"
 
 frc::Joystick joystick(0);
 
-void Robot::RobotInit() {}
+void Robot::RobotInit() {
+  nt::NetworkTableInstance::GetDefault().StartClient();
+}
 
 /**
  * This function is called every robot packet, no matter the mode. Use

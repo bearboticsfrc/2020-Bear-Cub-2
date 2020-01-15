@@ -9,7 +9,8 @@
 
 RobotContainer::RobotContainer() :
   m_autonomousCommand(&m_subsystem),
-  m_defaultDrive(&m_drivetrain)
+  m_defaultDrive(&m_drivetrain),
+  m_alignTarget(&m_drivetrain)
 {
   // Initialize all of your commands and subsystems here
 
@@ -27,5 +28,6 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
 }
 
 frc2::Command* RobotContainer::GetTeleopCommand() {
-  return &m_defaultDrive;
+  //return &m_defaultDrive;
+  return &m_alignTarget;
 }
