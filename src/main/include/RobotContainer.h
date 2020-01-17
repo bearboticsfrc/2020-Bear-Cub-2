@@ -13,6 +13,7 @@
 #include "commands/ExampleCommand.h"
 #include "commands/DefaultDrive.h"
 #include "commands/AlignTarget.h"
+#include "commands/AutoDrive.h"
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/Drivetrain.h"
 
@@ -37,6 +38,7 @@ class RobotContainer {
   ExampleCommand m_autonomousCommand;
   DefaultDrive m_defaultDrive;
   AlignTarget m_alignTarget;
+  std::unique_ptr<frc2::Command> m_ramsete;
 
   PigeonIMU pigeon;
 
