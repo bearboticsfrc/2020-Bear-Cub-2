@@ -8,7 +8,7 @@
 #include "Robot.h"
 
 #include <frc/Joystick.h>
-#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 #include <frc2/command/CommandScheduler.h>
 #include "networktables/NetworkTableInstance.h"
 
