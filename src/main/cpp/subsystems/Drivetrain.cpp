@@ -28,10 +28,10 @@ Drivetrain::Drivetrain() :
     frontLeft.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0);
     frontRight.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0);
 
-    backLeft.Config_kF(0, 1023.0 / 55.0);
-    backRight.Config_kF(0, 1023.0 / 222.0);
-    frontLeft.Config_kF(0, 1023.0 / 360.0);
-    frontRight.Config_kF(0, 1023.0 / 127.0);
+    backLeft.Config_kF(0, 1023.0 / 295.0);
+    backRight.Config_kF(0, 1023.0 / 215.0);
+    frontLeft.Config_kF(0, 1023.0 / 312.0);
+    frontRight.Config_kF(0, 1023.0 / 185.0);
 
     backLeft.Config_kP(0, 8.0);
     backRight.Config_kP(0, 8.0);
@@ -95,10 +95,10 @@ void Drivetrain::SetAllSpeed(double backLeftSpeed, double backRightSpeed, double
     frontLeftSpeed = std::min(1.0, std::max(-1.0, frontLeftSpeed));
     frontRightSpeed = std::min(1.0, std::max(-1.0, frontRightSpeed));
 
-    backLeftSpeed *= 50.0;
-    backRightSpeed *= 50.0;
-    frontLeftSpeed *= 50.0;
-    frontRightSpeed *= 50.0;
+    backLeftSpeed *= 150.0;
+    backRightSpeed *= 150.0;
+    frontLeftSpeed *= 150.0;
+    frontRightSpeed *= 150.0;
 
     /*backLeft.Set(ControlMode::PercentOutput, backLeftSpeed);
     backRight.Set(ControlMode::PercentOutput, backRightSpeed);

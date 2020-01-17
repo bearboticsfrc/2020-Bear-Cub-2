@@ -7,6 +7,16 @@
 
 #include "commands/AutoDrive.h"
 
+#include <frc/trajectory/Trajectory.h>
+#include <frc/trajectory/TrajectoryConfig.h>
+#include <frc/trajectory/TrajectoryGenerator.h>
+#include <frc/trajectory/TrajectoryUtil.h>
+
+frc::Trajectory generateTrajectory() {
+  frc::Trajectory trajectory = frc::TrajectoryUtil::FromPathweaverJson("/home/lvuser/deploy/Default.wpilib.json");
+  return trajectory;
+}
+
 AutoDrive::AutoDrive() {
   // Use addRequirements() here to declare subsystem dependencies.
 }
@@ -15,10 +25,5 @@ AutoDrive::AutoDrive() {
 void AutoDrive::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void AutoDrive::Execute() {}
-
-// Called once the command ends or is interrupted.
-void AutoDrive::End(bool interrupted) {}
-
-// Returns true when the command should end.
+void AutoDrive::Execute() {
 bool AutoDrive::IsFinished() { return false; }
