@@ -9,8 +9,10 @@
 
 #include <frc/Joystick.h>
 #include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandScheduler.h>
 #include "networktables/NetworkTableInstance.h"
+#include <sstream>
 
 frc::Joystick joystick(0);
 
@@ -48,7 +50,14 @@ void Robot::AutonomousInit() {
   }
 }
 
-void Robot::AutonomousPeriodic() {}
+void Robot::AutonomousPeriodic() {
+  frc::Pose2d pose = m_container.GetDrivetrain().GetPose();
+  std::stringstream str;
+  str << "X: " << pose.Translation().X()
+    << ", Y: " << pose.Translation().Y()
+    << ", Ang: " << pose.Rotation().Degrees();
+  frc::SmartDashboard::PutString("Pose", str.str());
+}
 
 void Robot::TeleopInit() {
   // This makes sure that the autonomous stops running when

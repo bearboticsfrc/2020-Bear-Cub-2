@@ -47,10 +47,10 @@ Drivetrain::Drivetrain() :
     frontLeft.Config_kF(0, 1023.0 / 312.0);
     frontRight.Config_kF(0, 1023.0 / 185.0);
 
-    backLeft.Config_kP(0, 8.0);
-    backRight.Config_kP(0, 8.0);
-    frontLeft.Config_kP(0, 8.0);
-    frontRight.Config_kP(0, 8.0);
+    backLeft.Config_kP(0, 4.0);
+    backRight.Config_kP(0, 4.0);
+    frontLeft.Config_kP(0, 4.0);
+    frontRight.Config_kP(0, 4.0);
 
     backLeft.Config_kI(0, 0.0);
     backRight.Config_kI(0, 0.0);
@@ -69,7 +69,7 @@ Drivetrain::Drivetrain() :
 }
 
 units::meter_t from_talon_distance(double dist) {
-    return units::meter_t(dist * EDGES_PER_METER);
+    return units::meter_t(dist / EDGES_PER_METER);
 }
 
 units::meters_per_second_t from_talon_velocity(double speed) {
@@ -113,6 +113,7 @@ void Drivetrain::Periodic() {
         prev[i] = motors[i]->GetSelectedSensorPosition();
         changes[i] = prev[i] - changes[i];
         frc::SmartDashboard::PutNumber("Motor " + std::to_string(i), averages[i].get_total());
+        frc::SmartDashboard::PutNumber("Changes " + std::to_string(i), changes[i]);
     }
     
 
@@ -136,7 +137,7 @@ ICC = [x - R sin(t), y + R cos(t)]
 const units::meter_t WHEELBASE = units::inch_t(12.0);
 
 void Drivetrain::UpdatePose(units::meter_t leftDist, units::meter_t rightDist) {
-    if (std::abs((leftDist - rightDist).to<double>()) < 0.0001) {
+    if (std::abs((leftDist - rightDist).to<double>()) < 0.001) {
         pose += Transform2d(
             Translation2d(
                 leftDist,

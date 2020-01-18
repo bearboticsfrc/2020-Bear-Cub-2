@@ -24,9 +24,14 @@ void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
 }
 
+Drivetrain &RobotContainer::GetDrivetrain() {
+  return m_drivetrain;
+}
+
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return &m_autonomousCommand;
+  //return &m_autonomousCommand;
+  return m_ramsete.get();
 }
 
 frc2::Command* RobotContainer::GetTeleopCommand() {
