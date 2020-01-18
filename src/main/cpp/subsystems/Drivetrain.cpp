@@ -82,6 +82,9 @@ void Drivetrain::Periodic() {
         averages[i].add_sample(motors[i]->GetSelectedSensorVelocity());
         frc::SmartDashboard::PutNumber("Motor " + std::to_string(i), averages[i].get_total());
     }
+    
+
+    frc::SmartDashboard::PutNumber("Distance", backLeft.GetSelectedSensorPosition());
 }
 
 void Drivetrain::SetSpeed(double speed) {
