@@ -17,7 +17,6 @@ frc::Joystick joystick(0);
 void Robot::RobotInit() {
   nt::NetworkTableInstance::GetDefault().StartClient();
 }
-
 /**
  * This function is called every robot packet, no matter the mode. Use
  * this for items like diagnostics that you want to run during disabled,

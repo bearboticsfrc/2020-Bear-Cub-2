@@ -9,6 +9,8 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc/kinematics/DifferentialDriveKinematics.h>
+#include <memory>
 
 /**
  * An example command.
@@ -30,3 +32,7 @@ class AutoDrive
 
   bool IsFinished() override;
 };
+
+class Drivetrain;
+
+std::unique_ptr<frc2::Command> getTrajectoryCommand(Drivetrain &drivetrain);
