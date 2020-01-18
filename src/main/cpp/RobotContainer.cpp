@@ -9,7 +9,10 @@
 
 RobotContainer::RobotContainer() :
   m_autonomousCommand(&m_subsystem),
-  m_defaultDrive(&m_drivetrain)
+  m_defaultDrive(&m_drivetrain),
+  m_alignTarget(&m_drivetrain),
+  m_ramsete(getTrajectoryCommand(m_drivetrain)),
+  pigeon(10)
 {
   // Initialize all of your commands and subsystems here
 
@@ -21,11 +24,17 @@ void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
 }
 
+Drivetrain &RobotContainer::GetDrivetrain() {
+  return m_drivetrain;
+}
+
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return &m_autonomousCommand;
+  //return &m_autonomousCommand;
+  return m_ramsete.get();
 }
 
 frc2::Command* RobotContainer::GetTeleopCommand() {
+  //return &m_defaultDrive;
   return &m_defaultDrive;
 }
